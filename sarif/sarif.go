@@ -515,7 +515,7 @@ type RunAutomationDetails struct {
 	Properties      PropertyBag `json:"properties,omitempty"`
 }
 
-// Static Analysis Results Format (SARIF) Version 2.1.0 JSON Schema: a standard format for the output of static analysis tools.
+// Static Analysis Results Format (SARIF) Version 2.1.0-rtm.4 JSON Schema: a standard format for the output of static analysis tools.
 type Sarif struct {
 	InlineExternalProperties []ExternalProperties `json:"inlineExternalProperties,omitempty"`
 	Properties               PropertyBag          `json:"properties,omitempty"`
