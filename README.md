@@ -7,10 +7,10 @@ To learn more about SARIF and find resources for working with it, you can visit 
 
 ## Generation
 
-The Go structs in this module were generated from the [SARIF JSON schema](https://docs.oasis-open.org/sarif/sarif/v2.1.0/cs01/schemas/sarif-schema-2.1.0.json) by the [schematyper](https://github.com/idubinskiy/schematyper) code generator.
+The Go structs in this module were generated from the [SARIF JSON schema](https://docs.oasis-open.org/sarif/sarif/v2.1.0/cs01/schemas/sarif-schema-2.1.0.json) by the [quicktype](https://github.com/quicktype/quicktype) code generator.
 
 ```shell
-$ cd _tools && go get github.com/idubinskiy/schematyper && cd -
-$ ./gen.sh
+$ npm install
+$ npm run build
 ```
 
