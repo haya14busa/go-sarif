@@ -18,39 +18,39 @@ func (r *Sarif) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
-// Static Analysis Results Format (SARIF) Version 2.1.0-rtm.4 JSON Schema: a standard format
-// for the output of static analysis tools.
+// Static Analysis Results Format (SARIF) Version 2.1.0 JSON Schema: a standard format for
+// the output of static analysis tools.
 type Sarif struct {
-	Schema                   *string              `json:"$schema,omitempty"`                 // The URI of the JSON schema corresponding to the version.
-	InlineExternalProperties []ExternalProperties `json:"inlineExternalProperties,omitempty"`// References to external property files that share data between runs.
-	Properties               *PropertyBag         `json:"properties,omitempty"`              // Key/value pairs that provide additional information about the log file.
-	Runs                     []Run                `json:"runs"`                              // The set of runs contained in this log file.
-	Version                  Version              `json:"version"`                           // The SARIF format version of this log file.
+	Schema                   *string              `json:"$schema,omitempty"`       // The URI of the JSON schema corresponding to the version.
+	InlineExternalProperties []ExternalProperties `json:"inlineExternalProperties"`// References to external property files that share data between runs.
+	Properties               *PropertyBag         `json:"properties,omitempty"`    // Key/value pairs that provide additional information about the log file.
+	Runs                     []Run                `json:"runs"`                    // The set of runs contained in this log file.
+	Version                  Version              `json:"version"`                 // The SARIF format version of this log file.
 }
 
 // The top-level element of an external property file.
 type ExternalProperties struct {
-	Addresses              []Address            `json:"addresses,omitempty"`             // Addresses that will be merged with a separate run.
-	Artifacts              []Artifact           `json:"artifacts,omitempty"`             // An array of artifact objects that will be merged with a separate run.
+	Addresses              []Address            `json:"addresses"`                       // Addresses that will be merged with a separate run.
+	Artifacts              []Artifact           `json:"artifacts"`                       // An array of artifact objects that will be merged with a separate run.
 	Conversion             *Conversion          `json:"conversion,omitempty"`            // A conversion object that will be merged with a separate run.
 	Driver                 *ToolComponent       `json:"driver,omitempty"`                // The analysis tool object that will be merged with a separate run.
-	Extensions             []ToolComponent      `json:"extensions,omitempty"`            // Tool extensions that will be merged with a separate run.
+	Extensions             []ToolComponent      `json:"extensions"`                      // Tool extensions that will be merged with a separate run.
 	ExternalizedProperties *PropertyBag         `json:"externalizedProperties,omitempty"`// Key/value pairs that provide additional information that will be merged with a separate; run.
-	Graphs                 []Graph              `json:"graphs,omitempty"`                // An array of graph objects that will be merged with a separate run.
-	GUID                   *string              `json:"guid,omitempty"`                  // A stable, unique identifer for this external properties object, in the form of a GUID.
-	Invocations            []Invocation         `json:"invocations,omitempty"`           // Describes the invocation of the analysis tool that will be merged with a separate run.
-	LogicalLocations       []LogicalLocation    `json:"logicalLocations,omitempty"`      // An array of logical locations such as namespaces, types or functions that will be merged; with a separate run.
-	Policies               []ToolComponent      `json:"policies,omitempty"`              // Tool policies that will be merged with a separate run.
+	Graphs                 []Graph              `json:"graphs"`                          // An array of graph objects that will be merged with a separate run.
+	GUID                   *string              `json:"guid,omitempty"`                  // A stable, unique identifier for this external properties object, in the form of a GUID.
+	Invocations            []Invocation         `json:"invocations"`                     // Describes the invocation of the analysis tool that will be merged with a separate run.
+	LogicalLocations       []LogicalLocation    `json:"logicalLocations"`                // An array of logical locations such as namespaces, types or functions that will be merged; with a separate run.
+	Policies               []ToolComponent      `json:"policies"`                        // Tool policies that will be merged with a separate run.
 	Properties             *PropertyBag         `json:"properties,omitempty"`            // Key/value pairs that provide additional information about the external properties.
-	Results                []Result             `json:"results,omitempty"`               // An array of result objects that will be merged with a separate run.
-	RunGUID                *string              `json:"runGuid,omitempty"`               // A stable, unique identifer for the run associated with this external properties object,; in the form of a GUID.
+	Results                []Result             `json:"results"`                         // An array of result objects that will be merged with a separate run.
+	RunGUID                *string              `json:"runGuid,omitempty"`               // A stable, unique identifier for the run associated with this external properties object,; in the form of a GUID.
 	Schema                 *string              `json:"schema,omitempty"`                // The URI of the JSON schema corresponding to the version of the external property file; format.
-	Taxonomies             []ToolComponent      `json:"taxonomies,omitempty"`            // Tool taxonomies that will be merged with a separate run.
-	ThreadFlowLocations    []ThreadFlowLocation `json:"threadFlowLocations,omitempty"`   // An array of threadFlowLocation objects that will be merged with a separate run.
-	Translations           []ToolComponent      `json:"translations,omitempty"`          // Tool translations that will be merged with a separate run.
+	Taxonomies             []ToolComponent      `json:"taxonomies"`                      // Tool taxonomies that will be merged with a separate run.
+	ThreadFlowLocations    []ThreadFlowLocation `json:"threadFlowLocations"`             // An array of threadFlowLocation objects that will be merged with a separate run.
+	Translations           []ToolComponent      `json:"translations"`                    // Tool translations that will be merged with a separate run.
 	Version                *Version             `json:"version,omitempty"`               // The SARIF format version of this external properties object.
-	WebRequests            []WebRequest         `json:"webRequests,omitempty"`           // Requests that will be merged with a separate run.
-	WebResponses           []WebResponse        `json:"webResponses,omitempty"`          // Responses that will be merged with a separate run.
+	WebRequests            []WebRequest         `json:"webRequests"`                     // Requests that will be merged with a separate run.
+	WebResponses           []WebResponse        `json:"webResponses"`                    // Responses that will be merged with a separate run.
 }
 
 // A physical or virtual address, or a range of addresses, in an 'addressable region'
@@ -176,7 +176,7 @@ type Address struct {
 //
 // Key/value pairs that provide additional information about the version control details.
 type PropertyBag struct {
-	Tags []string `json:"tags,omitempty"`// A set of distinct strings that provide additional information.
+	Tags []string `json:"tags"`// A set of distinct strings that provide additional information.
 }
 
 // A single artifact. In some cases, this artifact might be nested within another artifact.
@@ -192,7 +192,7 @@ type Artifact struct {
 	Offset              *int64            `json:"offset,omitempty"`             // The offset in bytes of the artifact within its containing artifact.
 	ParentIndex         *int64            `json:"parentIndex,omitempty"`        // Identifies the index of the immediate parent of the artifact, if this artifact is nested.
 	Properties          *PropertyBag      `json:"properties,omitempty"`         // Key/value pairs that provide additional information about the artifact.
-	Roles               []Role            `json:"roles,omitempty"`              // The role or roles played by the artifact in the analysis.
+	Roles               []Role            `json:"roles"`                        // The role or roles played by the artifact in the analysis.
 	SourceLanguage      *string           `json:"sourceLanguage,omitempty"`     // Specifies the source language for any artifact object that refers to a text file that; contains source code.
 }
 
@@ -286,7 +286,7 @@ type MultiformatMessageString struct {
 //
 // Encapsulates a message intended to be read by the end user.
 type Message struct {
-	Arguments  []string     `json:"arguments,omitempty"` // An array of strings to substitute into the message string.
+	Arguments  []string     `json:"arguments"`           // An array of strings to substitute into the message string.
 	ID         *string      `json:"id,omitempty"`        // The identifier for this message.
 	Markdown   *string      `json:"markdown,omitempty"`  // A Markdown message string.
 	Properties *PropertyBag `json:"properties,omitempty"`// Key/value pairs that provide additional information about the message.
@@ -297,7 +297,7 @@ type Message struct {
 //
 // Specifies the location of an artifact.
 //
-// An absolute URI specifying the location of the analysis tool's executable.
+// An absolute URI specifying the location of the executable that was invoked.
 //
 // A file containing the standard error stream from the process that was invoked.
 //
@@ -308,7 +308,7 @@ type Message struct {
 // A file containing the interleaved standard output and standard error stream from the
 // process that was invoked.
 //
-// The working directory for the analysis tool run.
+// The working directory for the invocation.
 //
 // Identifies the artifact that the analysis tool was instructed to scan. This need not be
 // the same as the artifact where the result actually occurred.
@@ -340,42 +340,42 @@ type ArtifactLocation struct {
 // A conversion object that describes how a converter transformed an analysis tool's native
 // reporting format into the SARIF format.
 type Conversion struct {
-	AnalysisToolLogFiles []ArtifactLocation `json:"analysisToolLogFiles,omitempty"`// The locations of the analysis tool's per-run log files.
-	Invocation           *Invocation        `json:"invocation,omitempty"`          // An invocation object that describes the invocation of the converter.
-	Properties           *PropertyBag       `json:"properties,omitempty"`          // Key/value pairs that provide additional information about the conversion.
-	Tool                 Tool               `json:"tool"`                          // A tool object that describes the converter.
+	AnalysisToolLogFiles []ArtifactLocation `json:"analysisToolLogFiles"`// The locations of the analysis tool's per-run log files.
+	Invocation           *Invocation        `json:"invocation,omitempty"`// An invocation object that describes the invocation of the converter.
+	Properties           *PropertyBag       `json:"properties,omitempty"`// Key/value pairs that provide additional information about the conversion.
+	Tool                 Tool               `json:"tool"`                // A tool object that describes the converter.
 }
 
 // An invocation object that describes the invocation of the converter.
 //
 // The runtime environment of the analysis tool run.
 type Invocation struct {
-	Account                            *string                 `json:"account,omitempty"`                           // The account that ran the analysis tool.
-	Arguments                          []string                `json:"arguments,omitempty"`                         // An array of strings, containing in order the command line arguments passed to the tool; from the operating system.
-	CommandLine                        *string                 `json:"commandLine,omitempty"`                       // The command line used to invoke the tool.
-	EndTimeUTC                         *string                 `json:"endTimeUtc,omitempty"`                        // The Coordinated Universal Time (UTC) date and time at which the run ended. See "Date/time; properties" in the SARIF spec for the required format.
-	EnvironmentVariables               map[string]string       `json:"environmentVariables,omitempty"`              // The environment variables associated with the analysis tool process, expressed as; key/value pairs.
-	ExecutableLocation                 *ArtifactLocation       `json:"executableLocation,omitempty"`                // An absolute URI specifying the location of the analysis tool's executable.
-	ExecutionSuccessful                bool                    `json:"executionSuccessful"`                         // Specifies whether the tool's execution completed successfully.
-	ExitCode                           *int64                  `json:"exitCode,omitempty"`                          // The process exit code.
-	ExitCodeDescription                *string                 `json:"exitCodeDescription,omitempty"`               // The reason for the process exit.
-	ExitSignalName                     *string                 `json:"exitSignalName,omitempty"`                    // The name of the signal that caused the process to exit.
-	ExitSignalNumber                   *int64                  `json:"exitSignalNumber,omitempty"`                  // The numeric value of the signal that caused the process to exit.
-	Machine                            *string                 `json:"machine,omitempty"`                           // The machine that hosted the analysis tool run.
-	NotificationConfigurationOverrides []ConfigurationOverride `json:"notificationConfigurationOverrides,omitempty"`// An array of configurationOverride objects that describe notifications related runtime; overrides.
-	ProcessID                          *int64                  `json:"processId,omitempty"`                         // The process id for the analysis tool run.
-	ProcessStartFailureMessage         *string                 `json:"processStartFailureMessage,omitempty"`        // The reason given by the operating system that the process failed to start.
-	Properties                         *PropertyBag            `json:"properties,omitempty"`                        // Key/value pairs that provide additional information about the invocation.
-	ResponseFiles                      []ArtifactLocation      `json:"responseFiles,omitempty"`                     // The locations of any response files specified on the tool's command line.
-	RuleConfigurationOverrides         []ConfigurationOverride `json:"ruleConfigurationOverrides,omitempty"`        // An array of configurationOverride objects that describe rules related runtime overrides.
-	StartTimeUTC                       *string                 `json:"startTimeUtc,omitempty"`                      // The Coordinated Universal Time (UTC) date and time at which the run started. See; "Date/time properties" in the SARIF spec for the required format.
-	Stderr                             *ArtifactLocation       `json:"stderr,omitempty"`                            // A file containing the standard error stream from the process that was invoked.
-	Stdin                              *ArtifactLocation       `json:"stdin,omitempty"`                             // A file containing the standard input stream to the process that was invoked.
-	Stdout                             *ArtifactLocation       `json:"stdout,omitempty"`                            // A file containing the standard output stream from the process that was invoked.
-	StdoutStderr                       *ArtifactLocation       `json:"stdoutStderr,omitempty"`                      // A file containing the interleaved standard output and standard error stream from the; process that was invoked.
-	ToolConfigurationNotifications     []Notification          `json:"toolConfigurationNotifications,omitempty"`    // A list of conditions detected by the tool that are relevant to the tool's configuration.
-	ToolExecutionNotifications         []Notification          `json:"toolExecutionNotifications,omitempty"`        // A list of runtime conditions detected by the tool during the analysis.
-	WorkingDirectory                   *ArtifactLocation       `json:"workingDirectory,omitempty"`                  // The working directory for the analysis tool run.
+	Account                            *string                 `json:"account,omitempty"`                   // The account under which the invocation occurred.
+	Arguments                          []string                `json:"arguments"`                           // An array of strings, containing in order the command line arguments passed to the tool; from the operating system.
+	CommandLine                        *string                 `json:"commandLine,omitempty"`               // The command line used to invoke the tool.
+	EndTimeUTC                         *string                 `json:"endTimeUtc,omitempty"`                // The Coordinated Universal Time (UTC) date and time at which the invocation ended. See; "Date/time properties" in the SARIF spec for the required format.
+	EnvironmentVariables               map[string]string       `json:"environmentVariables,omitempty"`      // The environment variables associated with the analysis tool process, expressed as; key/value pairs.
+	ExecutableLocation                 *ArtifactLocation       `json:"executableLocation,omitempty"`        // An absolute URI specifying the location of the executable that was invoked.
+	ExecutionSuccessful                bool                    `json:"executionSuccessful"`                 // Specifies whether the tool's execution completed successfully.
+	ExitCode                           *int64                  `json:"exitCode,omitempty"`                  // The process exit code.
+	ExitCodeDescription                *string                 `json:"exitCodeDescription,omitempty"`       // The reason for the process exit.
+	ExitSignalName                     *string                 `json:"exitSignalName,omitempty"`            // The name of the signal that caused the process to exit.
+	ExitSignalNumber                   *int64                  `json:"exitSignalNumber,omitempty"`          // The numeric value of the signal that caused the process to exit.
+	Machine                            *string                 `json:"machine,omitempty"`                   // The machine on which the invocation occurred.
+	NotificationConfigurationOverrides []ConfigurationOverride `json:"notificationConfigurationOverrides"`  // An array of configurationOverride objects that describe notifications related runtime; overrides.
+	ProcessID                          *int64                  `json:"processId,omitempty"`                 // The id of the process in which the invocation occurred.
+	ProcessStartFailureMessage         *string                 `json:"processStartFailureMessage,omitempty"`// The reason given by the operating system that the process failed to start.
+	Properties                         *PropertyBag            `json:"properties,omitempty"`                // Key/value pairs that provide additional information about the invocation.
+	ResponseFiles                      []ArtifactLocation      `json:"responseFiles"`                       // The locations of any response files specified on the tool's command line.
+	RuleConfigurationOverrides         []ConfigurationOverride `json:"ruleConfigurationOverrides"`          // An array of configurationOverride objects that describe rules related runtime overrides.
+	StartTimeUTC                       *string                 `json:"startTimeUtc,omitempty"`              // The Coordinated Universal Time (UTC) date and time at which the invocation started. See; "Date/time properties" in the SARIF spec for the required format.
+	Stderr                             *ArtifactLocation       `json:"stderr,omitempty"`                    // A file containing the standard error stream from the process that was invoked.
+	Stdin                              *ArtifactLocation       `json:"stdin,omitempty"`                     // A file containing the standard input stream to the process that was invoked.
+	Stdout                             *ArtifactLocation       `json:"stdout,omitempty"`                    // A file containing the standard output stream from the process that was invoked.
+	StdoutStderr                       *ArtifactLocation       `json:"stdoutStderr,omitempty"`              // A file containing the interleaved standard output and standard error stream from the; process that was invoked.
+	ToolConfigurationNotifications     []Notification          `json:"toolConfigurationNotifications"`      // A list of conditions detected by the tool that are relevant to the tool's configuration.
+	ToolExecutionNotifications         []Notification          `json:"toolExecutionNotifications"`          // A list of runtime conditions detected by the tool during the analysis.
+	WorkingDirectory                   *ArtifactLocation       `json:"workingDirectory,omitempty"`          // The working directory for the invocation.
 }
 
 // Information about how a specific rule or notification was reconfigured at runtime.
@@ -438,7 +438,7 @@ type Notification struct {
 	Descriptor     *ReportingDescriptorReference `json:"descriptor,omitempty"`    // A reference used to locate the descriptor relevant to this notification.
 	Exception      *Exception                    `json:"exception,omitempty"`     // The runtime exception, if any, relevant to this notification.
 	Level          *Level                        `json:"level,omitempty"`         // A value specifying the severity level of the notification.
-	Locations      []Location                    `json:"locations,omitempty"`     // The locations relevant to this notification.
+	Locations      []Location                    `json:"locations"`               // The locations relevant to this notification.
 	Message        Message                       `json:"message"`                 // A message that describes the condition that was encountered.
 	Properties     *PropertyBag                  `json:"properties,omitempty"`    // Key/value pairs that provide additional information about the notification.
 	ThreadID       *int64                        `json:"threadId,omitempty"`      // The thread identifier of the code that generated the notification.
@@ -449,11 +449,11 @@ type Notification struct {
 //
 // Describes a runtime exception encountered during the execution of an analysis tool.
 type Exception struct {
-	InnerExceptions []Exception  `json:"innerExceptions,omitempty"`// An array of exception objects each of which is considered a cause of this exception.
-	Kind            *string      `json:"kind,omitempty"`           // A string that identifies the kind of exception, for example, the fully qualified type; name of an object that was thrown, or the symbolic name of a signal.
-	Message         *string      `json:"message,omitempty"`        // A message that describes the exception.
-	Properties      *PropertyBag `json:"properties,omitempty"`     // Key/value pairs that provide additional information about the exception.
-	Stack           *Stack       `json:"stack,omitempty"`          // The sequence of function calls leading to the exception.
+	InnerExceptions []Exception  `json:"innerExceptions"`     // An array of exception objects each of which is considered a cause of this exception.
+	Kind            *string      `json:"kind,omitempty"`      // A string that identifies the kind of exception, for example, the fully qualified type; name of an object that was thrown, or the symbolic name of a signal.
+	Message         *string      `json:"message,omitempty"`   // A message that describes the exception.
+	Properties      *PropertyBag `json:"properties,omitempty"`// Key/value pairs that provide additional information about the exception.
+	Stack           *Stack       `json:"stack,omitempty"`     // The sequence of function calls leading to the exception.
 }
 
 // The sequence of function calls leading to the exception.
@@ -471,7 +471,7 @@ type Stack struct {
 type StackFrame struct {
 	Location   *Location    `json:"location,omitempty"`  // The location to which this stack frame refers.
 	Module     *string      `json:"module,omitempty"`    // The name of the module that contains the code of this stack frame.
-	Parameters []string     `json:"parameters,omitempty"`// The parameters of the call that is executing.
+	Parameters []string     `json:"parameters"`          // The parameters of the call that is executing.
 	Properties *PropertyBag `json:"properties,omitempty"`// Key/value pairs that provide additional information about the stack frame.
 	ThreadID   *int64       `json:"threadId,omitempty"`  // The thread identifier of the stack frame.
 }
@@ -486,23 +486,23 @@ type StackFrame struct {
 //
 // Identifies the location associated with the suppression.
 type Location struct {
-	Annotations      []Region               `json:"annotations,omitempty"`     // A set of regions relevant to the location.
+	Annotations      []Region               `json:"annotations"`               // A set of regions relevant to the location.
 	ID               *int64                 `json:"id,omitempty"`              // Value that distinguishes this location from all other locations within a single result; object.
-	LogicalLocations []LogicalLocation      `json:"logicalLocations,omitempty"`// The logical locations associated with the result.
+	LogicalLocations []LogicalLocation      `json:"logicalLocations"`          // The logical locations associated with the result.
 	Message          *Message               `json:"message,omitempty"`         // A message relevant to the location.
 	PhysicalLocation *PhysicalLocation      `json:"physicalLocation,omitempty"`// Identifies the artifact and region.
 	Properties       *PropertyBag           `json:"properties,omitempty"`      // Key/value pairs that provide additional information about the location.
-	Relationships    []LocationRelationship `json:"relationships,omitempty"`   // An array of objects that describe relationships between this location and others.
+	Relationships    []LocationRelationship `json:"relationships"`             // An array of objects that describe relationships between this location and others.
 }
 
-// A region within an artifact where a result was detected.
-//
 // Specifies a portion of the artifact that encloses the region. Allows a viewer to display
 // additional context around the region.
 //
 // Specifies a portion of the artifact.
 //
 // The region of the artifact to delete.
+//
+// A region within an artifact where a result was detected.
 type Region struct {
 	ByteLength     *int64           `json:"byteLength,omitempty"`    // The length of the region in bytes.
 	ByteOffset     *int64           `json:"byteOffset,omitempty"`    // The zero-based offset from the beginning of the artifact of the first byte in the region.
@@ -544,7 +544,7 @@ type PhysicalLocation struct {
 // Information about the relation of one location to another.
 type LocationRelationship struct {
 	Description *Message     `json:"description,omitempty"`// A description of the location relationship.
-	Kinds       []string     `json:"kinds,omitempty"`      // A set of distinct strings that categorize the relationship. Well-known kinds include; 'includes', 'isIncludedBy' and 'relevant'.
+	Kinds       []string     `json:"kinds"`                // A set of distinct strings that categorize the relationship. Well-known kinds include; 'includes', 'isIncludedBy' and 'relevant'.
 	Properties  *PropertyBag `json:"properties,omitempty"` // Key/value pairs that provide additional information about the location relationship.
 	Target      int64        `json:"target"`               // A reference to the related location.
 }
@@ -559,7 +559,7 @@ type LocationRelationship struct {
 // command-line arguments and the like) is identical for all aggregated files.
 type Tool struct {
 	Driver     ToolComponent   `json:"driver"`              // The analysis tool that was run.
-	Extensions []ToolComponent `json:"extensions,omitempty"`// Tool extensions that contributed to or reconfigured the analysis tool that was run.
+	Extensions []ToolComponent `json:"extensions"`          // Tool extensions that contributed to or reconfigured the analysis tool that was run.
 	Properties *PropertyBag    `json:"properties,omitempty"`// Key/value pairs that provide additional information about the tool.
 }
 
@@ -570,31 +570,31 @@ type Tool struct {
 // The analysis tool object that will be merged with a separate run.
 type ToolComponent struct {
 	AssociatedComponent                         *ToolComponentReference             `json:"associatedComponent,omitempty"`                        // The component which is strongly associated with this component. For a translation, this; refers to the component which has been translated. For an extension, this is the driver; that provides the extension's plugin model.
-	Contents                                    []Content                           `json:"contents,omitempty"`                                   // The kinds of data contained in this object.
+	Contents                                    []Content                           `json:"contents"`                                             // The kinds of data contained in this object.
 	DottedQuadFileVersion                       *string                             `json:"dottedQuadFileVersion,omitempty"`                      // The binary version of the tool component's primary executable file expressed as four; non-negative integers separated by a period (for operating systems that express file; versions in this way).
 	DownloadURI                                 *string                             `json:"downloadUri,omitempty"`                                // The absolute URI from which the tool component can be downloaded.
 	FullDescription                             *MultiformatMessageString           `json:"fullDescription,omitempty"`                            // A comprehensive description of the tool component.
 	FullName                                    *string                             `json:"fullName,omitempty"`                                   // The name of the tool component along with its version and any other useful identifying; information, such as its locale.
 	GlobalMessageStrings                        map[string]MultiformatMessageString `json:"globalMessageStrings,omitempty"`                       // A dictionary, each of whose keys is a resource identifier and each of whose values is a; multiformatMessageString object, which holds message strings in plain text and; (optionally) Markdown format. The strings can include placeholders, which can be used to; construct a message in combination with an arbitrary number of additional string; arguments.
-	GUID                                        *string                             `json:"guid,omitempty"`                                       // A unique identifer for the tool component in the form of a GUID.
+	GUID                                        *string                             `json:"guid,omitempty"`                                       // A unique identifier for the tool component in the form of a GUID.
 	InformationURI                              *string                             `json:"informationUri,omitempty"`                             // The absolute URI at which information about this version of the tool component can be; found.
 	IsComprehensive                             *bool                               `json:"isComprehensive,omitempty"`                            // Specifies whether this object contains a complete definition of the localizable and/or; non-localizable data for this component, as opposed to including only data that is; relevant to the results persisted to this log file.
 	Language                                    *string                             `json:"language,omitempty"`                                   // The language of the messages emitted into the log file during this run (expressed as an; ISO 639-1 two-letter lowercase language code) and an optional region (expressed as an ISO; 3166-1 two-letter uppercase subculture code associated with a country or region). The; casing is recommended but not required (in order for this data to conform to RFC5646).
 	LocalizedDataSemanticVersion                *string                             `json:"localizedDataSemanticVersion,omitempty"`               // The semantic version of the localized strings defined in this component; maintained by; components that provide translations.
-	Locations                                   []ArtifactLocation                  `json:"locations,omitempty"`                                  // An array of the artifactLocation objects associated with the tool component.
+	Locations                                   []ArtifactLocation                  `json:"locations"`                                            // An array of the artifactLocation objects associated with the tool component.
 	MinimumRequiredLocalizedDataSemanticVersion *string                             `json:"minimumRequiredLocalizedDataSemanticVersion,omitempty"`// The minimum value of localizedDataSemanticVersion required in translations consumed by; this component; used by components that consume translations.
 	Name                                        string                              `json:"name"`                                                 // The name of the tool component.
-	Notifications                               []ReportingDescriptor               `json:"notifications,omitempty"`                              // An array of reportingDescriptor objects relevant to the notifications related to the; configuration and runtime execution of the tool component.
+	Notifications                               []ReportingDescriptor               `json:"notifications"`                                        // An array of reportingDescriptor objects relevant to the notifications related to the; configuration and runtime execution of the tool component.
 	Organization                                *string                             `json:"organization,omitempty"`                               // The organization or company that produced the tool component.
 	Product                                     *string                             `json:"product,omitempty"`                                    // A product suite to which the tool component belongs.
 	ProductSuite                                *string                             `json:"productSuite,omitempty"`                               // A localizable string containing the name of the suite of products to which the tool; component belongs.
 	Properties                                  *PropertyBag                        `json:"properties,omitempty"`                                 // Key/value pairs that provide additional information about the tool component.
 	ReleaseDateUTC                              *string                             `json:"releaseDateUtc,omitempty"`                             // A string specifying the UTC date (and optionally, the time) of the component's release.
-	Rules                                       []ReportingDescriptor               `json:"rules,omitempty"`                                      // An array of reportingDescriptor objects relevant to the analysis performed by the tool; component.
+	Rules                                       []ReportingDescriptor               `json:"rules"`                                                // An array of reportingDescriptor objects relevant to the analysis performed by the tool; component.
 	SemanticVersion                             *string                             `json:"semanticVersion,omitempty"`                            // The tool component version in the format specified by Semantic Versioning 2.0.
 	ShortDescription                            *MultiformatMessageString           `json:"shortDescription,omitempty"`                           // A brief description of the tool component.
-	SupportedTaxonomies                         []ToolComponentReference            `json:"supportedTaxonomies,omitempty"`                        // An array of toolComponentReference objects to declare the taxonomies supported by the; tool component.
-	Taxa                                        []ReportingDescriptor               `json:"taxa,omitempty"`                                       // An array of reportingDescriptor objects relevant to the definitions of both standalone; and tool-defined taxonomies.
+	SupportedTaxonomies                         []ToolComponentReference            `json:"supportedTaxonomies"`                                  // An array of toolComponentReference objects to declare the taxonomies supported by the; tool component.
+	Taxa                                        []ReportingDescriptor               `json:"taxa"`                                                 // An array of reportingDescriptor objects relevant to the definitions of both standalone; and tool-defined taxonomies.
 	TranslationMetadata                         *TranslationMetadata                `json:"translationMetadata,omitempty"`                        // Translation metadata, required for a translation, not populated by other component types.
 	Version                                     *string                             `json:"version,omitempty"`                                    // The tool component version, in whatever format the component natively provides.
 }
@@ -603,25 +603,25 @@ type ToolComponent struct {
 // it provides or its runtime reporting.
 type ReportingDescriptor struct {
 	DefaultConfiguration *ReportingConfiguration             `json:"defaultConfiguration,omitempty"`// Default reporting configuration information.
-	DeprecatedGuids      []string                            `json:"deprecatedGuids,omitempty"`     // An array of unique identifies in the form of a GUID by which this report was known in; some previous version of the analysis tool.
-	DeprecatedIDS        []string                            `json:"deprecatedIds,omitempty"`       // An array of stable, opaque identifiers by which this report was known in some previous; version of the analysis tool.
-	DeprecatedNames      []string                            `json:"deprecatedNames,omitempty"`     // An array of readable identifiers by which this report was known in some previous version; of the analysis tool.
+	DeprecatedGuids      []string                            `json:"deprecatedGuids"`               // An array of unique identifies in the form of a GUID by which this report was known in; some previous version of the analysis tool.
+	DeprecatedIDS        []string                            `json:"deprecatedIds"`                 // An array of stable, opaque identifiers by which this report was known in some previous; version of the analysis tool.
+	DeprecatedNames      []string                            `json:"deprecatedNames"`               // An array of readable identifiers by which this report was known in some previous version; of the analysis tool.
 	FullDescription      *MultiformatMessageString           `json:"fullDescription,omitempty"`     // A description of the report. Should, as far as possible, provide details sufficient to; enable resolution of any problem indicated by the result.
-	GUID                 *string                             `json:"guid,omitempty"`                // A unique identifer for the reporting descriptor in the form of a GUID.
+	GUID                 *string                             `json:"guid,omitempty"`                // A unique identifier for the reporting descriptor in the form of a GUID.
 	Help                 *MultiformatMessageString           `json:"help,omitempty"`                // Provides the primary documentation for the report, useful when there is no online; documentation.
 	HelpURI              *string                             `json:"helpUri,omitempty"`             // A URI where the primary documentation for the report can be found.
 	ID                   string                              `json:"id"`                            // A stable, opaque identifier for the report.
 	MessageStrings       map[string]MultiformatMessageString `json:"messageStrings,omitempty"`      // A set of name/value pairs with arbitrary names. Each value is a multiformatMessageString; object, which holds message strings in plain text and (optionally) Markdown format. The; strings can include placeholders, which can be used to construct a message in combination; with an arbitrary number of additional string arguments.
 	Name                 *string                             `json:"name,omitempty"`                // A report identifier that is understandable to an end user.
 	Properties           *PropertyBag                        `json:"properties,omitempty"`          // Key/value pairs that provide additional information about the report.
-	Relationships        []ReportingDescriptorRelationship   `json:"relationships,omitempty"`       // An array of objects that describe relationships between this reporting descriptor and; others.
+	Relationships        []ReportingDescriptorRelationship   `json:"relationships"`                 // An array of objects that describe relationships between this reporting descriptor and; others.
 	ShortDescription     *MultiformatMessageString           `json:"shortDescription,omitempty"`    // A concise description of the report. Should be a single sentence that is understandable; when visible space is limited to a single line of text.
 }
 
 // Information about the relation of one reporting descriptor to another.
 type ReportingDescriptorRelationship struct {
 	Description *Message                     `json:"description,omitempty"`// A description of the reporting descriptor relationship.
-	Kinds       []string                     `json:"kinds,omitempty"`      // A set of distinct strings that categorize the relationship. Well-known kinds include; 'canPrecede', 'canFollow', 'willPrecede', 'willFollow', 'superset', 'subset', 'equal',; 'disjoint', 'relevant', and 'incomparable'.
+	Kinds       []string                     `json:"kinds"`                // A set of distinct strings that categorize the relationship. Well-known kinds include; 'canPrecede', 'canFollow', 'willPrecede', 'willFollow', 'superset', 'subset', 'equal',; 'disjoint', 'relevant', and 'incomparable'.
 	Properties  *PropertyBag                 `json:"properties,omitempty"` // Key/value pairs that provide additional information about the reporting descriptor; reference.
 	Target      ReportingDescriptorReference `json:"target"`               // A reference to the related reporting descriptor.
 }
@@ -644,8 +644,8 @@ type TranslationMetadata struct {
 // code (for example, a call graph).
 type Graph struct {
 	Description *Message     `json:"description,omitempty"`// A description of the graph.
-	Edges       []Edge       `json:"edges,omitempty"`      // An array of edge objects representing the edges of the graph.
-	Nodes       []Node       `json:"nodes,omitempty"`      // An array of node objects representing the nodes of the graph.
+	Edges       []Edge       `json:"edges"`                // An array of edge objects representing the edges of the graph.
+	Nodes       []Node       `json:"nodes"`                // An array of node objects representing the nodes of the graph.
 	Properties  *PropertyBag `json:"properties,omitempty"` // Key/value pairs that provide additional information about the graph.
 }
 
@@ -660,7 +660,7 @@ type Edge struct {
 
 // Represents a node in a graph.
 type Node struct {
-	Children   []Node       `json:"children,omitempty"`  // Array of child nodes.
+	Children   []Node       `json:"children"`            // Array of child nodes.
 	ID         string       `json:"id"`                  // A string that uniquely identifies the node within its graph.
 	Label      *Message     `json:"label,omitempty"`     // A short description of the node.
 	Location   *Location    `json:"location,omitempty"`  // A code location associated with the node.
@@ -670,35 +670,35 @@ type Node struct {
 // A result produced by an analysis tool.
 type Result struct {
 	AnalysisTarget      *ArtifactLocation              `json:"analysisTarget,omitempty"`     // Identifies the artifact that the analysis tool was instructed to scan. This need not be; the same as the artifact where the result actually occurred.
-	Attachments         []AttachmentElement            `json:"attachments,omitempty"`        // A set of artifacts relevant to the result.
+	Attachments         []AttachmentElement            `json:"attachments"`                  // A set of artifacts relevant to the result.
 	BaselineState       *BaselineState                 `json:"baselineState,omitempty"`      // The state of a result relative to a baseline of a previous run.
-	CodeFlows           []CodeFlow                     `json:"codeFlows,omitempty"`          // An array of 'codeFlow' objects relevant to the result.
+	CodeFlows           []CodeFlow                     `json:"codeFlows"`                    // An array of 'codeFlow' objects relevant to the result.
 	CorrelationGUID     *string                        `json:"correlationGuid,omitempty"`    // A stable, unique identifier for the equivalence class of logically identical results to; which this result belongs, in the form of a GUID.
 	Fingerprints        map[string]string              `json:"fingerprints,omitempty"`       // A set of strings each of which individually defines a stable, unique identity for the; result.
-	Fixes               []Fix                          `json:"fixes,omitempty"`              // An array of 'fix' objects, each of which represents a proposed fix to the problem; indicated by the result.
-	Graphs              []Graph                        `json:"graphs,omitempty"`             // An array of zero or more unique graph objects associated with the result.
-	GraphTraversals     []GraphTraversal               `json:"graphTraversals,omitempty"`    // An array of one or more unique 'graphTraversal' objects.
-	GUID                *string                        `json:"guid,omitempty"`               // A stable, unique identifer for the result in the form of a GUID.
+	Fixes               []Fix                          `json:"fixes"`                        // An array of 'fix' objects, each of which represents a proposed fix to the problem; indicated by the result.
+	Graphs              []Graph                        `json:"graphs"`                       // An array of zero or more unique graph objects associated with the result.
+	GraphTraversals     []GraphTraversal               `json:"graphTraversals"`              // An array of one or more unique 'graphTraversal' objects.
+	GUID                *string                        `json:"guid,omitempty"`               // A stable, unique identifier for the result in the form of a GUID.
 	HostedViewerURI     *string                        `json:"hostedViewerUri,omitempty"`    // An absolute URI at which the result can be viewed.
 	Kind                *ResultKind                    `json:"kind,omitempty"`               // A value that categorizes results by evaluation state.
 	Level               *Level                         `json:"level,omitempty"`              // A value specifying the severity level of the result.
-	Locations           []Location                     `json:"locations,omitempty"`          // The set of locations where the result was detected. Specify only one location unless the; problem indicated by the result can only be corrected by making a change at every; specified location.
+	Locations           []Location                     `json:"locations"`                    // The set of locations where the result was detected. Specify only one location unless the; problem indicated by the result can only be corrected by making a change at every; specified location.
 	Message             Message                        `json:"message"`                      // A message that describes the result. The first sentence of the message only will be; displayed when visible space is limited.
 	OccurrenceCount     *int64                         `json:"occurrenceCount,omitempty"`    // A positive integer specifying the number of times this logically unique result was; observed in this run.
 	PartialFingerprints map[string]string              `json:"partialFingerprints,omitempty"`// A set of strings that contribute to the stable, unique identity of the result.
 	Properties          *PropertyBag                   `json:"properties,omitempty"`         // Key/value pairs that provide additional information about the result.
 	Provenance          *ResultProvenance              `json:"provenance,omitempty"`         // Information about how and when the result was detected.
 	Rank                *float64                       `json:"rank,omitempty"`               // A number representing the priority or importance of the result.
-	RelatedLocations    []Location                     `json:"relatedLocations,omitempty"`   // A set of locations relevant to this result.
+	RelatedLocations    []Location                     `json:"relatedLocations"`             // A set of locations relevant to this result.
 	Rule                *ReportingDescriptorReference  `json:"rule,omitempty"`               // A reference used to locate the rule descriptor relevant to this result.
-	RuleID              *string                        `json:"ruleId,omitempty"`             // The stable, unique identifier of the rule, if any, to which this notification is; relevant. This member can be used to retrieve rule metadata from the rules dictionary, if; it exists.
+	RuleID              *string                        `json:"ruleId,omitempty"`             // The stable, unique identifier of the rule, if any, to which this result is relevant.
 	RuleIndex           *int64                         `json:"ruleIndex,omitempty"`          // The index within the tool component rules array of the rule object associated with this; result.
-	Stacks              []Stack                        `json:"stacks,omitempty"`             // An array of 'stack' objects relevant to the result.
-	Suppressions        []Suppression                  `json:"suppressions,omitempty"`       // A set of suppressions relevant to this result.
-	Taxa                []ReportingDescriptorReference `json:"taxa,omitempty"`               // An array of references to taxonomy reporting descriptors that are applicable to the; result.
+	Stacks              []Stack                        `json:"stacks"`                       // An array of 'stack' objects relevant to the result.
+	Suppressions        []Suppression                  `json:"suppressions"`                 // A set of suppressions relevant to this result.
+	Taxa                []ReportingDescriptorReference `json:"taxa"`                         // An array of references to taxonomy reporting descriptors that are applicable to the; result.
 	WebRequest          *WebRequest                    `json:"webRequest,omitempty"`         // A web request associated with this result.
 	WebResponse         *WebResponse                   `json:"webResponse,omitempty"`        // A web response associated with this result.
-	WorkItemUris        []string                       `json:"workItemUris,omitempty"`       // The URIs of the work items associated with this result.
+	WorkItemUris        []string                       `json:"workItemUris"`                 // The URIs of the work items associated with this result.
 }
 
 // An artifact relevant to a result.
@@ -706,8 +706,8 @@ type AttachmentElement struct {
 	ArtifactLocation ArtifactLocation `json:"artifactLocation"`     // The location of the attachment.
 	Description      *Message         `json:"description,omitempty"`// A message describing the role played by the attachment.
 	Properties       *PropertyBag     `json:"properties,omitempty"` // Key/value pairs that provide additional information about the attachment.
-	Rectangles       []Rectangle      `json:"rectangles,omitempty"` // An array of rectangles specifying areas of interest within the image.
-	Regions          []Region         `json:"regions,omitempty"`    // An array of regions of interest within the attachment.
+	Rectangles       []Rectangle      `json:"rectangles"`           // An array of rectangles specifying areas of interest within the image.
+	Regions          []Region         `json:"regions"`              // An array of regions of interest within the attachment.
 }
 
 // An area within an image.
@@ -746,14 +746,14 @@ type ThreadFlowLocation struct {
 	ExecutionTimeUTC *string                             `json:"executionTimeUtc,omitempty"`// The Coordinated Universal Time (UTC) date and time at which this location was executed.
 	Importance       *Importance                         `json:"importance,omitempty"`      // Specifies the importance of this location in understanding the code flow in which it; occurs. The order from most to least important is "essential", "important",; "unimportant". Default: "important".
 	Index            *int64                              `json:"index,omitempty"`           // The index within the run threadFlowLocations array.
-	Kinds            []string                            `json:"kinds,omitempty"`           // A set of distinct strings that categorize the thread flow location. Well-known kinds; include 'acquire', 'release', 'enter', 'exit', 'call', 'return', 'branch', 'implicit',; 'false', 'true', 'caution', 'danger', 'unknown', 'unreachable', 'taint', 'function',; 'handler', 'lock', 'memory', 'resource', 'scope' and 'value'.
+	Kinds            []string                            `json:"kinds"`                     // A set of distinct strings that categorize the thread flow location. Well-known kinds; include 'acquire', 'release', 'enter', 'exit', 'call', 'return', 'branch', 'implicit',; 'false', 'true', 'caution', 'danger', 'unknown', 'unreachable', 'taint', 'function',; 'handler', 'lock', 'memory', 'resource', 'scope' and 'value'.
 	Location         *Location                           `json:"location,omitempty"`        // The code location.
 	Module           *string                             `json:"module,omitempty"`          // The name of the module that contains the code that is executing.
 	NestingLevel     *int64                              `json:"nestingLevel,omitempty"`    // An integer representing a containment hierarchy within the thread flow.
 	Properties       *PropertyBag                        `json:"properties,omitempty"`      // Key/value pairs that provide additional information about the threadflow location.
 	Stack            *Stack                              `json:"stack,omitempty"`           // The call stack leading to this location.
 	State            map[string]MultiformatMessageString `json:"state,omitempty"`           // A dictionary, each of whose keys specifies a variable or expression, the associated value; of which represents the variable or expression value. For an annotation of kind; 'continuation', for example, this dictionary might hold the current assumed values of a; set of global variables.
-	Taxa             []ReportingDescriptorReference      `json:"taxa,omitempty"`            // An array of references to rule or taxonomy reporting descriptors that are applicable to; the thread flow location.
+	Taxa             []ReportingDescriptorReference      `json:"taxa"`                      // An array of references to rule or taxonomy reporting descriptors that are applicable to; the thread flow location.
 	WebRequest       *WebRequest                         `json:"webRequest,omitempty"`      // A web request associated with this thread flow location.
 	WebResponse      *WebResponse                        `json:"webResponse,omitempty"`     // A web response associated with this thread flow location.
 }
@@ -818,7 +818,7 @@ type Replacement struct {
 // Represents a path through a graph.
 type GraphTraversal struct {
 	Description      *Message                            `json:"description,omitempty"`     // A description of this graph traversal.
-	EdgeTraversals   []EdgeTraversal                     `json:"edgeTraversals,omitempty"`  // The sequences of edges traversed by this graph traversal.
+	EdgeTraversals   []EdgeTraversal                     `json:"edgeTraversals"`            // The sequences of edges traversed by this graph traversal.
 	ImmutableState   map[string]MultiformatMessageString `json:"immutableState,omitempty"`  // Values of relevant expressions at the start of the graph traversal that remain constant; for the graph traversal.
 	InitialState     map[string]MultiformatMessageString `json:"initialState,omitempty"`    // Values of relevant expressions at the start of the graph traversal that may change during; graph traversal.
 	Properties       *PropertyBag                        `json:"properties,omitempty"`      // Key/value pairs that provide additional information about the graph traversal.
@@ -839,7 +839,7 @@ type EdgeTraversal struct {
 //
 // Contains information about how and when a result was detected.
 type ResultProvenance struct {
-	ConversionSources     []PhysicalLocation `json:"conversionSources,omitempty"`    // An array of physicalLocation objects which specify the portions of an analysis tool's; output that a converter transformed into the result.
+	ConversionSources     []PhysicalLocation `json:"conversionSources"`              // An array of physicalLocation objects which specify the portions of an analysis tool's; output that a converter transformed into the result.
 	FirstDetectionRunGUID *string            `json:"firstDetectionRunGuid,omitempty"`// A GUID-valued string equal to the automationDetails.guid property of the run in which the; result was first detected.
 	FirstDetectionTimeUTC *string            `json:"firstDetectionTimeUtc,omitempty"`// The Coordinated Universal Time (UTC) date and time at which the result was first; detected. See "Date/time properties" in the SARIF spec for the required format.
 	InvocationIndex       *int64             `json:"invocationIndex,omitempty"`      // The index within the run.invocations array of the invocation object which describes the; tool invocation that detected the result.
@@ -850,18 +850,18 @@ type ResultProvenance struct {
 
 // A suppression that is relevant to a result.
 type Suppression struct {
-	GUID          *string         `json:"guid,omitempty"`         // A stable, unique identifer for the suprression in the form of a GUID.
+	GUID          *string         `json:"guid,omitempty"`         // A stable, unique identifier for the suprression in the form of a GUID.
 	Justification *string         `json:"justification,omitempty"`// A string representing the justification for the suppression.
 	Kind          SuppressionKind `json:"kind"`                   // A string that indicates where the suppression is persisted.
 	Location      *Location       `json:"location,omitempty"`     // Identifies the location associated with the suppression.
 	Properties    *PropertyBag    `json:"properties,omitempty"`   // Key/value pairs that provide additional information about the suppression.
-	State         *State          `json:"state,omitempty"`        // A string that indicates the state of the suppression.
+	Status        *Status         `json:"status,omitempty"`       // A string that indicates the review status of the suppression.
 }
 
 // Describes a single run of an analysis tool, and contains the reported output of that run.
 type Run struct {
-	Addresses                      []Address                       `json:"addresses,omitempty"`                     // Addresses associated with this run instance, if any.
-	Artifacts                      []Artifact                      `json:"artifacts,omitempty"`                     // An array of artifact objects relevant to the run.
+	Addresses                      []Address                       `json:"addresses"`                               // Addresses associated with this run instance, if any.
+	Artifacts                      []Artifact                      `json:"artifacts"`                               // An array of artifact objects relevant to the run.
 	AutomationDetails              *RunAutomationDetails           `json:"automationDetails,omitempty"`             // Automation details that describe this run.
 	BaselineGUID                   *string                         `json:"baselineGuid,omitempty"`                  // The 'guid' property of a previous SARIF 'run' that comprises the baseline that was used; to compute result 'baselineState' properties for the run.
 	ColumnKind                     *ColumnKind                     `json:"columnKind,omitempty"`                    // Specifies the unit in which the tool measures columns.
@@ -869,25 +869,25 @@ type Run struct {
 	DefaultEncoding                *string                         `json:"defaultEncoding,omitempty"`               // Specifies the default encoding for any artifact object that refers to a text file.
 	DefaultSourceLanguage          *string                         `json:"defaultSourceLanguage,omitempty"`         // Specifies the default source language for any artifact object that refers to a text file; that contains source code.
 	ExternalPropertyFileReferences *ExternalPropertyFileReferences `json:"externalPropertyFileReferences,omitempty"`// References to external property files that should be inlined with the content of a root; log file.
-	Graphs                         []Graph                         `json:"graphs,omitempty"`                        // An array of zero or more unique graph objects associated with the run.
-	Invocations                    []Invocation                    `json:"invocations,omitempty"`                   // Describes the invocation of the analysis tool.
+	Graphs                         []Graph                         `json:"graphs"`                                  // An array of zero or more unique graph objects associated with the run.
+	Invocations                    []Invocation                    `json:"invocations"`                             // Describes the invocation of the analysis tool.
 	Language                       *string                         `json:"language,omitempty"`                      // The language of the messages emitted into the log file during this run (expressed as an; ISO 639-1 two-letter lowercase culture code) and an optional region (expressed as an ISO; 3166-1 two-letter uppercase subculture code associated with a country or region). The; casing is recommended but not required (in order for this data to conform to RFC5646).
-	LogicalLocations               []LogicalLocation               `json:"logicalLocations,omitempty"`              // An array of logical locations such as namespaces, types or functions.
-	NewlineSequences               []string                        `json:"newlineSequences,omitempty"`              // An ordered list of character sequences that were treated as line breaks when computing; region information for the run.
+	LogicalLocations               []LogicalLocation               `json:"logicalLocations"`                        // An array of logical locations such as namespaces, types or functions.
+	NewlineSequences               []string                        `json:"newlineSequences"`                        // An ordered list of character sequences that were treated as line breaks when computing; region information for the run.
 	OriginalURIBaseIDS             map[string]ArtifactLocation     `json:"originalUriBaseIds,omitempty"`            // The artifact location specified by each uriBaseId symbol on the machine where the tool; originally ran.
-	Policies                       []ToolComponent                 `json:"policies,omitempty"`                      // Contains configurations that may potentially override both; reportingDescriptor.defaultConfiguration (the tool's default severities) and; invocation.configurationOverrides (severities established at run-time from the command; line).
+	Policies                       []ToolComponent                 `json:"policies"`                                // Contains configurations that may potentially override both; reportingDescriptor.defaultConfiguration (the tool's default severities) and; invocation.configurationOverrides (severities established at run-time from the command; line).
 	Properties                     *PropertyBag                    `json:"properties,omitempty"`                    // Key/value pairs that provide additional information about the run.
-	RedactionTokens                []string                        `json:"redactionTokens,omitempty"`               // An array of strings used to replace sensitive information in a redaction-aware property.
-	Results                        []Result                        `json:"results,omitempty"`                       // The set of results contained in an SARIF log. The results array can be omitted when a run; is solely exporting rules metadata. It must be present (but may be empty) if a log file; represents an actual scan.
-	RunAggregates                  []RunAutomationDetails          `json:"runAggregates,omitempty"`                 // Automation details that describe the aggregate of runs to which this run belongs.
+	RedactionTokens                []string                        `json:"redactionTokens"`                         // An array of strings used to replace sensitive information in a redaction-aware property.
+	Results                        []Result                        `json:"results"`                                 // The set of results contained in an SARIF log. The results array can be omitted when a run; is solely exporting rules metadata. It must be present (but may be empty) if a log file; represents an actual scan.
+	RunAggregates                  []RunAutomationDetails          `json:"runAggregates"`                           // Automation details that describe the aggregate of runs to which this run belongs.
 	SpecialLocations               *SpecialLocations               `json:"specialLocations,omitempty"`              // A specialLocations object that defines locations of special significance to SARIF; consumers.
-	Taxonomies                     []ToolComponent                 `json:"taxonomies,omitempty"`                    // An array of toolComponent objects relevant to a taxonomy in which results are categorized.
-	ThreadFlowLocations            []ThreadFlowLocation            `json:"threadFlowLocations,omitempty"`           // An array of threadFlowLocation objects cached at run level.
+	Taxonomies                     []ToolComponent                 `json:"taxonomies"`                              // An array of toolComponent objects relevant to a taxonomy in which results are categorized.
+	ThreadFlowLocations            []ThreadFlowLocation            `json:"threadFlowLocations"`                     // An array of threadFlowLocation objects cached at run level.
 	Tool                           Tool                            `json:"tool"`                                    // Information about the tool or tool pipeline that generated the results in this run. A run; can only contain results produced by a single tool or tool pipeline. A run can aggregate; results from multiple log files, as long as context around the tool run (tool; command-line arguments and the like) is identical for all aggregated files.
-	Translations                   []ToolComponent                 `json:"translations,omitempty"`                  // The set of available translations of the localized data provided by the tool.
-	VersionControlProvenance       []VersionControlDetails         `json:"versionControlProvenance,omitempty"`      // Specifies the revision in version control of the artifacts that were scanned.
-	WebRequests                    []WebRequest                    `json:"webRequests,omitempty"`                   // An array of request objects cached at run level.
-	WebResponses                   []WebResponse                   `json:"webResponses,omitempty"`                  // An array of response objects cached at run level.
+	Translations                   []ToolComponent                 `json:"translations"`                            // The set of available translations of the localized data provided by the tool.
+	VersionControlProvenance       []VersionControlDetails         `json:"versionControlProvenance"`                // Specifies the revision in version control of the artifacts that were scanned.
+	WebRequests                    []WebRequest                    `json:"webRequests"`                             // An array of request objects cached at run level.
+	WebResponses                   []WebResponse                   `json:"webResponses"`                            // An array of response objects cached at run level.
 }
 
 // Automation details that describe this run.
@@ -896,7 +896,7 @@ type Run struct {
 type RunAutomationDetails struct {
 	CorrelationGUID *string      `json:"correlationGuid,omitempty"`// A stable, unique identifier for the equivalence class of runs to which this object's; containing run object belongs in the form of a GUID.
 	Description     *Message     `json:"description,omitempty"`    // A description of the identity and role played within the engineering system by this; object's containing run object.
-	GUID            *string      `json:"guid,omitempty"`           // A stable, unique identifer for this object's containing run object in the form of a GUID.
+	GUID            *string      `json:"guid,omitempty"`           // A stable, unique identifier for this object's containing run object in the form of a GUID.
 	ID              *string      `json:"id,omitempty"`             // A hierarchical string that uniquely identifies this object's containing run object.
 	Properties      *PropertyBag `json:"properties,omitempty"`     // Key/value pairs that provide additional information about the run automation details.
 }
@@ -904,23 +904,23 @@ type RunAutomationDetails struct {
 // References to external property files that should be inlined with the content of a root
 // log file.
 type ExternalPropertyFileReferences struct {
-	Addresses              []ExternalPropertyFileReference `json:"addresses,omitempty"`             // An array of external property files containing run.addresses arrays to be merged with the; root log file.
-	Artifacts              []ExternalPropertyFileReference `json:"artifacts,omitempty"`             // An array of external property files containing run.artifacts arrays to be merged with the; root log file.
+	Addresses              []ExternalPropertyFileReference `json:"addresses"`                       // An array of external property files containing run.addresses arrays to be merged with the; root log file.
+	Artifacts              []ExternalPropertyFileReference `json:"artifacts"`                       // An array of external property files containing run.artifacts arrays to be merged with the; root log file.
 	Conversion             *ExternalPropertyFileReference  `json:"conversion,omitempty"`            // An external property file containing a run.conversion object to be merged with the root; log file.
 	Driver                 *ExternalPropertyFileReference  `json:"driver,omitempty"`                // An external property file containing a run.driver object to be merged with the root log; file.
-	Extensions             []ExternalPropertyFileReference `json:"extensions,omitempty"`            // An array of external property files containing run.extensions arrays to be merged with; the root log file.
+	Extensions             []ExternalPropertyFileReference `json:"extensions"`                      // An array of external property files containing run.extensions arrays to be merged with; the root log file.
 	ExternalizedProperties *ExternalPropertyFileReference  `json:"externalizedProperties,omitempty"`// An external property file containing a run.properties object to be merged with the root; log file.
-	Graphs                 []ExternalPropertyFileReference `json:"graphs,omitempty"`                // An array of external property files containing a run.graphs object to be merged with the; root log file.
-	Invocations            []ExternalPropertyFileReference `json:"invocations,omitempty"`           // An array of external property files containing run.invocations arrays to be merged with; the root log file.
-	LogicalLocations       []ExternalPropertyFileReference `json:"logicalLocations,omitempty"`      // An array of external property files containing run.logicalLocations arrays to be merged; with the root log file.
-	Policies               []ExternalPropertyFileReference `json:"policies,omitempty"`              // An array of external property files containing run.policies arrays to be merged with the; root log file.
+	Graphs                 []ExternalPropertyFileReference `json:"graphs"`                          // An array of external property files containing a run.graphs object to be merged with the; root log file.
+	Invocations            []ExternalPropertyFileReference `json:"invocations"`                     // An array of external property files containing run.invocations arrays to be merged with; the root log file.
+	LogicalLocations       []ExternalPropertyFileReference `json:"logicalLocations"`                // An array of external property files containing run.logicalLocations arrays to be merged; with the root log file.
+	Policies               []ExternalPropertyFileReference `json:"policies"`                        // An array of external property files containing run.policies arrays to be merged with the; root log file.
 	Properties             *PropertyBag                    `json:"properties,omitempty"`            // Key/value pairs that provide additional information about the external property files.
-	Results                []ExternalPropertyFileReference `json:"results,omitempty"`               // An array of external property files containing run.results arrays to be merged with the; root log file.
-	Taxonomies             []ExternalPropertyFileReference `json:"taxonomies,omitempty"`            // An array of external property files containing run.taxonomies arrays to be merged with; the root log file.
-	ThreadFlowLocations    []ExternalPropertyFileReference `json:"threadFlowLocations,omitempty"`   // An array of external property files containing run.threadFlowLocations arrays to be; merged with the root log file.
-	Translations           []ExternalPropertyFileReference `json:"translations,omitempty"`          // An array of external property files containing run.translations arrays to be merged with; the root log file.
-	WebRequests            []ExternalPropertyFileReference `json:"webRequests,omitempty"`           // An array of external property files containing run.requests arrays to be merged with the; root log file.
-	WebResponses           []ExternalPropertyFileReference `json:"webResponses,omitempty"`          // An array of external property files containing run.responses arrays to be merged with the; root log file.
+	Results                []ExternalPropertyFileReference `json:"results"`                         // An array of external property files containing run.results arrays to be merged with the; root log file.
+	Taxonomies             []ExternalPropertyFileReference `json:"taxonomies"`                      // An array of external property files containing run.taxonomies arrays to be merged with; the root log file.
+	ThreadFlowLocations    []ExternalPropertyFileReference `json:"threadFlowLocations"`             // An array of external property files containing run.threadFlowLocations arrays to be; merged with the root log file.
+	Translations           []ExternalPropertyFileReference `json:"translations"`                    // An array of external property files containing run.translations arrays to be merged with; the root log file.
+	WebRequests            []ExternalPropertyFileReference `json:"webRequests"`                     // An array of external property files containing run.requests arrays to be merged with the; root log file.
+	WebResponses           []ExternalPropertyFileReference `json:"webResponses"`                    // An array of external property files containing run.responses arrays to be merged with the; root log file.
 }
 
 // An external property file containing a run.conversion object to be merged with the root
@@ -935,7 +935,7 @@ type ExternalPropertyFileReferences struct {
 // Contains information that enables a SARIF consumer to locate the external property file
 // that contains the value of an externalized property associated with the run.
 type ExternalPropertyFileReference struct {
-	GUID       *string           `json:"guid,omitempty"`      // A stable, unique identifer for the external property file in the form of a GUID.
+	GUID       *string           `json:"guid,omitempty"`      // A stable, unique identifier for the external property file in the form of a GUID.
 	ItemCount  *int64            `json:"itemCount,omitempty"` // A non-negative integer specifying the number of items contained in the external property; file.
 	Location   *ArtifactLocation `json:"location,omitempty"`  // The location of the external property file.
 	Properties *PropertyBag      `json:"properties,omitempty"`// Key/value pairs that provide additional information about the external property file.
@@ -1045,12 +1045,12 @@ const (
 	InSource SuppressionKind = "inSource"
 )
 
-// A string that indicates the state of the suppression.
-type State string
+// A string that indicates the review status of the suppression.
+type Status string
 const (
-	Accepted State = "accepted"
-	Rejected State = "rejected"
-	UnderReview State = "underReview"
+	Accepted Status = "accepted"
+	Rejected Status = "rejected"
+	UnderReview Status = "underReview"
 )
 
 // The SARIF format version of this external properties object.
