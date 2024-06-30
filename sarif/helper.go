@@ -27,6 +27,6 @@ func (v BaselineState) Ptr() *BaselineState     { return &v }
 func (v Importance) Ptr() *Importance           { return &v }
 func (v ResultKind) Ptr() *ResultKind           { return &v }
 func (v SuppressionKind) Ptr() *SuppressionKind { return &v }
-func (v State) Ptr() *State                     { return &v }
+func (v Status) Ptr() *Status                   { return &v }
 func (v Version) Ptr() *Version                 { return &v }
 func (v ColumnKind) Ptr() *ColumnKind           { return &v }
